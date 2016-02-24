@@ -7,7 +7,7 @@ struct student {
     string id;
     double percent;
     char grade;
-} ;
+};
 
 class Exams {
     public: 
@@ -162,7 +162,7 @@ double Exams::score(string studentAns){
             temp++;
         }
     }
-    return (double)temp/(double)examLength;
+    return (double)temp/(double)examLength * 100.0;
 }
 
 char Exams::grade(double score){
