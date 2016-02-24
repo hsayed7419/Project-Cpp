@@ -11,7 +11,7 @@ class Exams {
         char grade();
         void loop();
         string getInput();
-        int stringToNum(int i);
+        int stringToNum(string stdID, int i);
         
     private:
         string answerKey;
@@ -20,10 +20,11 @@ class Exams {
         string buffer[100];
         void displayStats();
         int numStudents;
-        bool DEBUG = true;
+        bool DEBUG;
 };
 
 Exams::Exams(){
+    DEBUG = true;
     answerKey = "";
     numStudents = 0;
     cout << "Answer key = ";
@@ -45,19 +46,22 @@ void Exams::loop(){
     for (int i = 0; i < numStudents; i++){
         cout << "Student " << i + 1 << " ID:";
         cin >> currentID;
-        if(isIDCompat())
+        if(isIDCompat(currentID))
             continue;
         else {
             cout << "Error, Incompatible ID" << endl;
             cout << "ID must be 7 digits" << endl;
             cout << "Re-enter ID: " << endl;
             i--;
+            continue;
         }
+        
+        
     }
 }
 
-int Exams::stringToNum(int i){
-    switch (currentID.at(i)){
+int Exams::stringToNum(string stdID, int i){
+    switch (stdID.at(i)){
         case '0':
             return 0;
         case '1':
@@ -83,14 +87,17 @@ int Exams::stringToNum(int i){
     }
 }
 
-bool Exams::isIDCompat(){
+bool Exams::isIDCompat(string stdID){
     bool compat = false;
     int num = 0;
-    for (int i = 0; i < 7; i++){
-        if (stringToNum(i) >= 0)
-            num++;
-    }    
-    if (num == 7 && currentID.length() == 7)
+    if (stdID.length() == 7) {
+        for (int i = 0; i < 7; i++){
+            if (stringToNum(stdID, i) >= 0)
+                num++;
+        }   
+    }
+    
+    if (num == 7)
         compat = true;
     if (DEBUG && compat)
             cout << "Successful save of student ID" << endl;
