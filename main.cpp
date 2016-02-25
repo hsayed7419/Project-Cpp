@@ -56,7 +56,6 @@ Exams::Exams(){
     cout << "Enter the number of students to be graded: ";
     cin >> numStudents;
     if(numStudents > 0){
-        
         if (DEBUG)
             cout << "Successful save of numStudents" << endl;
     } else {
@@ -71,7 +70,10 @@ bool Exams::getStatus(){
 }
 
 void Exams::loop(){
-    struct student students[numStudents];
+    if (DEBUG)
+        cout << "numStudents" << numStudents << endl;
+    int n = numStudents;
+    struct student students[n];
     currentID = "";
     string studentEXAM;
     int studentScore;
@@ -96,6 +98,12 @@ void Exams::loop(){
         displayStudent(students[i]);
     }
     displayStats(students);
+    if (DEBUG){
+        char x = 0;
+        while (x == 0){
+            cin >> x;
+        }
+    }
 }
 
 int Exams::stringToNum(string stdID, int i){
@@ -196,7 +204,10 @@ void Exams::displayStudent(struct student students){
 }
 
 void Exams::displayStats(struct student students[]){
-    double x[numStudents];
+    if (DEBUG)
+        cout << "numStudents displayStats" << numStudents << endl;
+    int n = numStudents;
+    double x[n];
     for (int i = 0; i < numStudents; i++){
         x[i] = students[i].percent;
     }
