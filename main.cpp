@@ -45,7 +45,7 @@ Exams::Exams(){
     if ((examLength = answerKey.size()) > 0){
         if (examAnsCompat()){
             if (DEBUG)
-                cout << "Successful save of answerKey" << endl;
+                cout << "Successful save of answerKey" << "\nexamLength =" << examLength << endl;
         }
         else{
             cout << "Exam Solution was incompatible" << endl;
@@ -157,9 +157,18 @@ bool Exams::examAnsCompat(){
 
 double Exams::score(string studentAns){
     int temp = 0;
-    for (int i = 0; i < examLength; i++){
-        if (studentAns.at(i) == answerKey.at(i)){
-            temp++;
+    int testLength = studentAns.length();
+    if (testLength >= examLength){
+        for (int i = 0; i < examLength; i++){
+            if (studentAns.at(i) == answerKey.at(i)){
+                temp++;
+            }
+        }
+    } else {
+        for (int i = 0; i < testLength; i++){
+            if (studentAns.at(i) == answerKey.at(i)){
+                temp++;
+            }
         }
     }
     return (double)temp/(double)examLength * 100.0;
