@@ -28,11 +28,19 @@ class Exams {
         double getLow(double x[]);
         double studentScore;
         int examLength;
+
+		// Used for loops but not for allocation
         int numStudents;
         string answerKey;
         string currentID;
         void displayStats(struct student students[]);
         void displayStudent(struct student students);
+
+		/* If you want a class size greater than 50
+			You will have to modify this size.
+			Size is used for allocating space at compile time!
+			*/
+		static const int MAX_SIZE = 50;
 };
 
 Exams::Exams(){
@@ -65,15 +73,17 @@ Exams::Exams(){
     }
 }
 
+// Used because state of class is private
 bool Exams::getStatus(){
     return status;
 }
 
+
+// Main loop wich gathers information and returns to user
 void Exams::loop(){
     if (DEBUG)
         cout << "numStudents" << numStudents << endl;
-    int n = numStudents;
-    struct student students[n];
+    struct student students[MAX_SIZE];
     currentID = "";
     string studentEXAM;
     int studentScore;
@@ -106,6 +116,7 @@ void Exams::loop(){
     }
 }
 
+// Used to make sure that entered ID contains only integers, otherwise output is negative as a flag
 int Exams::stringToNum(string stdID, int i){
     switch (stdID.at(i)){
         case '0':
@@ -133,6 +144,8 @@ int Exams::stringToNum(string stdID, int i){
     }
 }
 
+
+// Checks if the ID has the proper length and calls function to check if all values are integers
 bool Exams::isIDCompat(string stdID){
     bool compat = false;
     int num = 0;
@@ -150,6 +163,11 @@ bool Exams::isIDCompat(string stdID){
     return compat;
 }
 
+/* Mainly for preventing application crash or misbehavior
+	checks to see if the answers are a,b,c,d,e, or f
+	otherwise returns false, status flag will be false and 
+	program will end.
+	*/
 bool Exams::examAnsCompat(){
     int count = 0;
     for (int i = 0; i < examLength; i++){
@@ -163,6 +181,7 @@ bool Exams::examAnsCompat(){
         return false;
 }
 
+// Tallies up the correct answers of the student's entered exam and returns as a double
 double Exams::score(string studentAns){
     int temp = 0;
     int testLength = studentAns.length();
@@ -182,6 +201,7 @@ double Exams::score(string studentAns){
     return (double)temp/(double)examLength * 100.0;
 }
 
+// Creates a character grading score for the student
 char Exams::grade(double score){
     if (score >= 90.0)
         return 'A';
@@ -199,15 +219,16 @@ char Exams::grade(double score){
         return 'G';
 }
 
+// Displays the student's score
 void Exams::displayStudent(struct student students){
     cout << "Score: " << students.percent << "% " << students.grade << endl;
 }
 
+// Displays the statistics of the class (educational class not C++ class)
 void Exams::displayStats(struct student students[]){
     if (DEBUG)
         cout << "numStudents displayStats" << numStudents << endl;
-    int n = numStudents;
-    double x[n];
+    double x[MAX_SIZE];
     for (int i = 0; i < numStudents; i++){
         x[i] = students[i].percent;
     }
@@ -216,6 +237,7 @@ void Exams::displayStats(struct student students[]){
     cout << "Low Score: " << (int)getLow(x) << endl;
 }
 
+// Gets the high score
 double Exams::getHigh(double x[]){
     double high = 0;
     for (int i = 0; i < numStudents; i++){
@@ -225,6 +247,7 @@ double Exams::getHigh(double x[]){
     return high;
 }
 
+// Gets the low score
 double Exams::getLow(double x[]){
     double low = 100;
     for (int i = 0; i < numStudents; i++){
@@ -234,6 +257,7 @@ double Exams::getLow(double x[]){
     return low;
 }
 
+// Creates an average of all the scores
 double Exams::getAvg(double x[]){
     double total = 0;
     for (int i = 0; i < numStudents; i++){
