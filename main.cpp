@@ -36,7 +36,7 @@ class Exams {
 };
 
 Exams::Exams(){
-    DEBUG = true;
+    DEBUG = false;
     status = true;
     answerKey = "";
     numStudents = 0;
