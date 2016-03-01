@@ -88,6 +88,8 @@ void Exams::loop(){
     string studentEXAM;
     int studentScore;
     char studentGrade;
+    cout << "For each of the following " << numStudents << " students," << endl;
+    cout << "enter the Student ID and answers:" << endl;    
     for (int i = 0; i < numStudents; i++){
         cout << "Student " << i + 1 << " ID:";
         cin >> currentID;
@@ -107,6 +109,7 @@ void Exams::loop(){
         students[i].grade = studentGrade;
         displayStudent(students[i]);
     }
+    cout << "Statistics:" << endl;
     displayStats(students);
     if (DEBUG){
         char x = 0;

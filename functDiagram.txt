@@ -1,0 +1,5 @@
+main() -> Exam() -> exam.loop()
+    -> for() -> isIDCompat()
+        -> stringToNum()
+    -> score() -> grade() -> displayStudent() -> displayStats()
+        -> getAvg() -> getHigh() -> getLow()
