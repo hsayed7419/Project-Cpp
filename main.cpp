@@ -188,6 +188,8 @@ bool Exams::examAnsCompat(){
 double Exams::score(string studentAns){
     int temp = 0;
     int testLength = studentAns.length();
+    if (DEBUG)
+        cout << "Student score prior: " << temp << endl;
     if (testLength >= examLength){
         for (int i = 0; i < examLength; i++){
             if (studentAns.at(i) == answerKey.at(i)){
