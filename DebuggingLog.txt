@@ -1,0 +1,15 @@
+Problem:
+    Whenever a student's exam was entered and it wasnt exactly the same as the answer key, the student was given 0% (an F)
+Solution:
+    Score algorithm was repaired by having a second for loop for tests with lengths less than the actual exam.  In primary for loop the same algorithm was applied.
+
+Problem:
+    Program crashes after student data is entered.
+Solution:
+    Localize a global variable inside of member functions instead of one global variable.
+    
+Problem:
+    Application crashes after data was entered/
+    Due to array not initialized properly (with zero sieze)
+Solution:
+    Set a global array size to allocate space, and then use limit to only edit a portion of the actual array.
